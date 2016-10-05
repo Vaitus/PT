@@ -4,6 +4,6 @@
 public class Meme {
 
     public static void main(String [ ] args){
-        System.out.println("jaja");
+        System.out.println("jajaa");
     }
 }
