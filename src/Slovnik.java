@@ -9,8 +9,6 @@ public class Slovnik {
 	/**Hlavní konstruktor zpracovávající pøímo string.*/
 	public Slovnik(String s){
 		
-		
-		
 	}
 	
 	/**Konstruktor pro import ze souboru.*/

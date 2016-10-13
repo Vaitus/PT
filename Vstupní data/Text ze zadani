@@ -1,9 +1,7 @@
-# PT
 Standardní zadání semestrální práce pro KIV/PT 2016/2017
 Zadání je určeno pro dva studenty. Práce zahrnuje dvě dílčí části - vytvoření funkčního programu
 diskrétní simulace a napsání strukturované dokumentace.
 Zadání:
-
 Vytvořte program, který načte text ze souboru a ze všech unikátních slov vyskytujících se v textu
 vytvoří slovník. Slovník bude možné vyexportovat ve vhodně zvoleném formátu do souboru a znovu
 použít při dalším spuštění programu. Program dále umožní napsat nebo načíst libovolný text a v něm
