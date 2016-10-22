@@ -52,7 +52,6 @@ public class Node {
         return null;
     }
     public void rozdeleni(int index){
-        System.out.println(this.key + " tohohle key");
         Node novy = new Node(this.key.substring(0,index));
         novy.predek = this.predek;
 
@@ -63,8 +62,6 @@ public class Node {
 
         this.predek = novy;
         this.key = this.key.substring(index);
-
-        System.out.println(this.key + " " + novy.key);
     }
 
     public void pridejPotomka(Node n){

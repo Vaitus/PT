@@ -61,7 +61,6 @@ public class CTrie {
             if (n.masHodnotu(x.charAt(i),i)) {
                 if (posledni) {
                     if (n.key.length() > x.length()) {
-                        System.out.println("nekdy tu?");
                         n.rozdeleni(i);
                         n.predek.zacatecniIndex.add(zacatecniIndex);
                     }
@@ -72,7 +71,6 @@ public class CTrie {
                 continue;
             } else if (n.masNaslednikaSHodnotou(x.charAt(i))) {
                 n.key = n.key.substring(0, i);
-                System.out.println(n.key + " Proc se to tu usekne");
                 pridatRek(n.naslednikSHodnotou(x.charAt(i)), x.substring(i), zacatecniIndex);
                 return;
             } else {
@@ -111,9 +109,19 @@ public class CTrie {
             }
         }
         if (nodeInd == temp.key.length()) {
-            return temp.zacatecniIndex;
+            if (temp.zacatecniIndex.isEmpty()) {
+                return null;
+            } else {
+                return temp.zacatecniIndex;
+            }
         } else {
             return null;
         }
+    }
+
+    public String vytvoreniSlovniku() {
+
+
+        return null;
     }
 }

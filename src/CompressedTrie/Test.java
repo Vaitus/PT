@@ -17,7 +17,7 @@ public class Test {
 
         System.out.println("WTF?");
 
-        System.out.println(trie.prohledat("Blaze"));
+        System.out.println(trie.prohledat("Bla"));
 
     }
 
