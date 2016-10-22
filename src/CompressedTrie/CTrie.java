@@ -1,7 +1,10 @@
 package CompressedTrie;
 
+import java.util.LinkedList;
+
 /**
  * Created by Vaitus on 15.10.2016.
+ * Implementace komprimovane trie
  */
 public class CTrie {
     Node root;
@@ -20,6 +23,7 @@ public class CTrie {
         };
     }
 
+    /*@Deprecated
     public void pridatA(String x, int zacatecniIndex) {
         Node soucasnyNode;
         Node tempNode;
@@ -43,7 +47,7 @@ public class CTrie {
         else {
             //NEexistuje ve strome, pridat celej text x do jednoho nodu
         }
-    }
+    }*/
 
     public void pridejRekurzivne(String x, int zacatniIndex) {
         pridatRek(root, x, zacatniIndex);
@@ -57,6 +61,7 @@ public class CTrie {
             if (n.masHodnotu(x.charAt(i),i)) {
                 if (posledni) {
                     if (n.key.length() > x.length()) {
+                        System.out.println("nekdy tu?");
                         n.rozdeleni(i);
                         n.predek.zacatecniIndex.add(zacatecniIndex);
                     }
@@ -67,6 +72,7 @@ public class CTrie {
                 continue;
             } else if (n.masNaslednikaSHodnotou(x.charAt(i))) {
                 n.key = n.key.substring(0, i);
+                System.out.println(n.key + " Proc se to tu usekne");
                 pridatRek(n.naslednikSHodnotou(x.charAt(i)), x.substring(i), zacatecniIndex);
                 return;
             } else {
@@ -75,8 +81,9 @@ public class CTrie {
 
                 if(n.jeRoot()) {
                     n.pridejPotomka(novy);
-                }
-                else {
+                } else if (n.key.length()-1 <= i) {
+                    n.pridejPotomka(novy);
+                } else {
                     n.rozdeleni(i);
                     n.predek.pridejPotomka(novy);
                 }
@@ -86,9 +93,27 @@ public class CTrie {
         }
     }
 
-    public String toString(Node x) {
+    public LinkedList<Integer> prohledat(String x){
+        Node temp = root;
 
+        int index = 0;
+        int nodeInd = 0;
 
-        return super.toString();
+        while (index < x.length()) {
+            if (nodeInd < temp.key.length() && temp.key.charAt(nodeInd) == x.charAt(index)) {
+                index++;
+                nodeInd++;
+            } else if (index < x.length() && temp.masNaslednikaSHodnotou(x.charAt(index))) {
+                temp = temp.naslednikSHodnotou(x.charAt(index));
+                nodeInd = 0;
+            } else {
+                return null;
+            }
+        }
+        if (nodeInd == temp.key.length()) {
+            return temp.zacatecniIndex;
+        } else {
+            return null;
+        }
     }
 }

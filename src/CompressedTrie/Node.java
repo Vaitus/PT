@@ -31,8 +31,10 @@ public class Node {
 
     public boolean masNaslednikaSHodnotou(char x) {
         for (Node n: naslednik) {
-            if (n.key.charAt(0) == x) {
-                return true;
+            if (!n.key.isEmpty()) {
+                if (n.key.charAt(0) == x) {
+                    return true;
+                }
             }
         }
 
@@ -41,13 +43,16 @@ public class Node {
 
     public Node naslednikSHodnotou(char x){
         for (Node n: naslednik) {
-            if (n.key.charAt(0) == x) {
-                return n;
+            if (!n.key.isEmpty()) {
+                if (n.key.charAt(0) == x) {
+                    return n;
+                }
             }
         }
         return null;
     }
     public void rozdeleni(int index){
+        System.out.println(this.key + " tohohle key");
         Node novy = new Node(this.key.substring(0,index));
         novy.predek = this.predek;
 
@@ -58,6 +63,8 @@ public class Node {
 
         this.predek = novy;
         this.key = this.key.substring(index);
+
+        System.out.println(this.key + " " + novy.key);
     }
 
     public void pridejPotomka(Node n){

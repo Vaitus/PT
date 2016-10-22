@@ -2,15 +2,14 @@ package CompressedTrie;
 
 /**
  * Created by Vaitus on 13.10.2016.
- * Implementace komprimovane trie
  */
-public class CompTrie {
+public class DeprecatedCompTrie {
     Node root;
 
     /**
      * TODO
      */
-    public CompTrie(){
+    public DeprecatedCompTrie(){
         root = new Node("");
     }
     /**
