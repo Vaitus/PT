@@ -1,5 +1,7 @@
 package CompressedTrie;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.LinkedList;
 
 /**
@@ -56,12 +58,13 @@ public class CTrie {
     private void pridatRek(Node n, String x, int zacatecniIndex) {
         boolean posledni = false;
         for (int i = 0; i < x.length(); i++) {
-            if ( i >= x.length()-1 ) posledni = true;
+            if ( i >= x.length()-1) posledni = true;
 
             if (n.masHodnotu(x.charAt(i),i)) {
                 if (posledni) {
                     if (n.key.length() > x.length()) {
-                        n.rozdeleni(i);
+                        n.rozdeleni(i+1);
+                        System.out.println("tui " + i + " " + n.predek.key);
                         n.predek.zacatecniIndex.add(zacatecniIndex);
                     }
                     else {
@@ -120,8 +123,16 @@ public class CTrie {
     }
 
     public String vytvoreniSlovniku() {
-
-
-        return null;
+        return vytvoreniSlovnikuRek(root, root.key);
     }
+    private String vytvoreniSlovnikuRek(Node n, String s) {
+
+
+        for (Node x : n.naslednik) {
+
+        }
+
+        return s;
+    }
+
 }

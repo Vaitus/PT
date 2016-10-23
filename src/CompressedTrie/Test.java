@@ -9,13 +9,15 @@ public class Test {
         CTrie trie = new CTrie();
 
         trie.pridejRekurzivne("Blabla", 2);
-        trie.pridejRekurzivne("Blablaaa", 2);
+        trie.pridejRekurzivne("Bl", 3);
+        trie.pridejRekurzivne("Bla", 4);
+        trie.pridejRekurzivne("B", 5);
         trie.pridejRekurzivne("Black", 7);
         trie.pridejRekurzivne("Blaz", 8);
         trie.pridejRekurzivne("Blaz", 9);
         trie.pridejRekurzivne("Blaze", 10);
 
-        System.out.println("WTF?");
+        System.out.println(trie.vytvoreniSlovniku());
 
         System.out.println(trie.prohledat("Bla"));
 
