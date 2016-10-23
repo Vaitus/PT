@@ -1,7 +1,5 @@
 package CompressedTrie;
 
-import org.jetbrains.annotations.Contract;
-
 import java.util.LinkedList;
 
 /**
@@ -64,7 +62,6 @@ public class CTrie {
                 if (posledni) {
                     if (n.key.length() > x.length()) {
                         n.rozdeleni(i+1);
-                        System.out.println("tui " + i + " " + n.predek.key);
                         n.predek.zacatecniIndex.add(zacatecniIndex);
                     }
                     else {
@@ -122,17 +119,23 @@ public class CTrie {
         }
     }
 
+    private static String slovnik = "";
+
     public String vytvoreniSlovniku() {
-        return vytvoreniSlovnikuRek(root, root.key);
+        vytvoreniSlovnikuRek(root);
+        return slovnik;
     }
-    private String vytvoreniSlovnikuRek(Node n, String s) {
-
-
+    private void vytvoreniSlovnikuRek(Node n) {
         for (Node x : n.naslednik) {
-
+            if (!x.zacatecniIndex.isEmpty() && !x.naslednik.isEmpty()) {
+                slovnik += x.vypisCeleSlovo() + " ";
+            }
+            if (x.naslednik.isEmpty()) {
+                slovnik += x.vypisCeleSlovo() + " ";
+            } else {
+                vytvoreniSlovnikuRek(x);
+            }
         }
-
-        return s;
     }
 
 }

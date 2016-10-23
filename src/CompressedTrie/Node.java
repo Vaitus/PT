@@ -69,6 +69,19 @@ public class Node {
         this.naslednik.add(n);
     }
 
+    public String vypisCeleSlovo() {
+        String s = "";
+        Node n = this;
+
+        while (!n.jeRoot()) {
+            s = n.key + s;
+            n = n.predek;
+        }
+
+        //System.out.println(s);
+        return s;
+    }
+
     @Override
     public String toString() {
         String result = key + " ";

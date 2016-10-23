@@ -9,8 +9,6 @@ public class Test {
         CTrie trie = new CTrie();
 
         trie.pridejRekurzivne("Blabla", 2);
-        trie.pridejRekurzivne("Bl", 3);
-        trie.pridejRekurzivne("Bla", 4);
         trie.pridejRekurzivne("B", 5);
         trie.pridejRekurzivne("Black", 7);
         trie.pridejRekurzivne("Blaz", 8);
