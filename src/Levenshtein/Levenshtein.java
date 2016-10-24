@@ -1,12 +1,14 @@
 package Levenshtein;
 
 
+import java.util.LinkedList;
+
 /**
  * Created by Vaitus on 23.10.2016.
  */
 public class Levenshtein {
 
-    public static Integer LevenshteinVzdalenost(String txt1, String txt2) {
+    public static Integer levenshteinVzdalenost(String txt1, String txt2) {
         int[][] pole = new int[txt1.length()+1][txt2.length()+1];
 
         for (int i = 0; i < txt1.length()+1; i++) {
@@ -31,6 +33,26 @@ public class Levenshtein {
 
     private static Integer minimum(int a, int b, int c) {
         return Math.min(Math.min(a,b),c);
+    }
+
+    public static LinkedList<String> vypisDesetSlov(String[] slovnik, String slovo) {
+        int[] levenDis = new int[slovnik.length];
+        for (int i = 0; i < slovnik.length; i++) {
+            levenDis[i] = levenshteinVzdalenost(slovnik[i], slovo);
+        }
+
+        LinkedList<String> vysledek = new LinkedList<>();
+        int minimalniVzdalenost = 0;
+
+        while (vysledek.size() <= 10 && minimalniVzdalenost < 4) {
+            for (int i = 0; i < slovnik.length; i++) {
+                if (levenDis[i] == minimalniVzdalenost && vysledek.size() < 11) {
+                    vysledek.add(slovnik[i]);
+                }
+            }
+            minimalniVzdalenost++;
+        }
+        return vysledek;
     }
 
 }

@@ -11,8 +11,9 @@ public class Test {
 
     public static void main(String[] args) {
         CTrie trie = new CTrie();
+        String s = "japonec nekdo ty ona ja syn sin kin klin sona son win won kon licieum kliceum klin";
 
-        System.out.println(Levenshtein.LevenshteinVzdalenost("Kokot", "kojoti"));
+        System.out.println(Levenshtein.vypisDesetSlov(s.split(" "), "szn"));
 
        /* String s = "Ano ty ne a ty ja proc ja ty ono ja";
         for (int i = 0; i < s.split(" ").length; i++) {
