@@ -2,8 +2,6 @@ package CompressedTrie;
 
 import Levenshtein.Levenshtein;
 
-import java.io.*;
-
 /**
  * Created by Vaitus on 13.10.2016.
  */
@@ -13,7 +11,7 @@ public class Test {
         CTrie trie = new CTrie();
         String s = "japonec nekdo ty ona ja syn sin kin klin sona son win won kon licieum kliceum klin";
 
-        System.out.println(Levenshtein.vypisDesetSlov(s.split(" "), "szn"));
+        System.out.println(Levenshtein.vypisDesetSlov(s.split(" "), "stn", 10, 3));
 
        /* String s = "Ano ty ne a ty ja proc ja ty ono ja";
         for (int i = 0; i < s.split(" ").length; i++) {

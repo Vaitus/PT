@@ -9,6 +9,9 @@ import java.util.LinkedList;
 public class CTrie {
     Node root;
 
+    /**
+     * Konstruktor na vytvoreni trie a vytvoreni jejiho roota
+     */
     public CTrie() {
         root = new Node("") {
             @Override
@@ -49,10 +52,21 @@ public class CTrie {
         }
     }*/
 
+    /**
+     * Pridavani slov do Trie, zacina od roota
+     * @param x pridavane slovo
+     * @param zacatniIndex index na kterem zacinalo v textu
+     */
     public void pridejRekurzivne(String x, int zacatniIndex) {
         pridatRek(root, x, zacatniIndex);
     }
 
+    /**
+     * Pridavani slov do Trie
+     * @param n prohledavany Node
+     * @param x dane slovo
+     * @param zacatecniIndex index na kterem zacinalo v textu
+     */
     private void pridatRek(Node n, String x, int zacatecniIndex) {
         boolean posledni = false;
         for (int i = 0; i < x.length(); i++) {
@@ -91,6 +105,11 @@ public class CTrie {
         }
     }
 
+    /**
+     * Vyhleda jestli hledane slovo se nachazi v Trie
+     * @param x hledane slovo
+     * @return pokud se nachazi navrati zacatecni indexy v textu, pokud nenachazi vrati null
+     */
     public LinkedList<Integer> prohledat(String x){
         Node temp = root;
 
@@ -119,12 +138,25 @@ public class CTrie {
         }
     }
 
+    /**
+     * Vytvareny slovnik
+     */
     private static String slovnik = "";
 
+    /**
+     * Vytvori retezec ze vsech slov v Trie
+     * @return retezec slovniku
+     */
     public String vytvoreniSlovniku() {
+        slovnik = "";
         vytvoreniSlovnikuRek(root);
         return slovnik;
     }
+
+    /**
+     * Rekuretni vytvareni slovniku, doplnkova metoda k vytvoreniSlovniku
+     * @param n dany Node
+     */
     private void vytvoreniSlovnikuRek(Node n) {
         for (Node x : n.naslednik) {
             if (!x.zacatecniIndex.isEmpty() && !x.naslednik.isEmpty()) {
