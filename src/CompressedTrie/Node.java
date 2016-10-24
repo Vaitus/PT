@@ -4,13 +4,24 @@ import java.util.LinkedList;
 
 /**
  * Created by Vaitus on 13.10.2016.
- * Node pro danou Trie
+ * Node pro s danou hodnotou pro Trie
  */
 public class Node {
+    /**
+     * Hdnota Node
+     */
     String key;
-
+    /**
+     * Predchazejici Node
+     */
     Node predek;
+    /**
+     * List vsech nasledujicich Node pro tento
+     */
     LinkedList<Node> naslednik = new LinkedList<>();
+    /**
+     * List vsech zacatecnich indexu v textu pro tento Node
+     */
     LinkedList<Integer> zacatecniIndex = new LinkedList<>();
 
     /**
