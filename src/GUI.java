@@ -18,6 +18,9 @@ public class GUI extends JFrame{
 	/**Serial.*/
 	private static final long serialVersionUID = 1L;
 	
+	/**Sirka používaných textových objektù*/
+	private final int sirka = 53;
+	
 	//Naèátání textu.
 	
 	/**Tlaèítko pro naètení textu z JTextArea vstup nebo ze souboru (pøepíná CheckBox).*/
@@ -66,13 +69,13 @@ public class GUI extends JFrame{
 	JButton hledej;
 	
 	/**Objekt, do kterého se zapisuje hledaný klíè.*/
-	JTextArea klic= new JTextArea(1, 50);
+	JTextArea klic= new JTextArea(1, sirka);
 	
 	/**Objekt, do kterého se vypisuje textový výstup.*/
-	JTextArea vypis= new JTextArea(5, 50);
+	JTextArea vypis= new JTextArea(5, sirka);
 	
 	/**Objekt, do kterého se zapisuje textový vstup.*/
-	JTextArea zapis= new JTextArea(10, 50);
+	JTextArea zapis= new JTextArea(10, sirka);
 	
 	/**Objekt, který urèuje, má-li se brát text ze souboru a nebo z objektu zapis.*/
 	JCheckBox check= new JCheckBox();
@@ -175,6 +178,8 @@ public class GUI extends JFrame{
         c.gridy = 3;
         c.gridwidth = 3;
         vypis.setEditable(false);
+        vypis.setLineWrap(true);
+        vypis.setWrapStyleWord(true);
         vnitrekPN.add(vypis, c);
         
         zapis.setText("Text ke zpracování. Toto pole bude využito jen pokud je povolen zápis z konzole.");
@@ -184,6 +189,8 @@ public class GUI extends JFrame{
         c.gridy = 4;
         c.gridwidth = 3;
         zapis.setEditable(true);
+        zapis.setLineWrap(true);
+        zapis.setWrapStyleWord(true);
         vnitrekPN.add(zapis, c);
         
         
@@ -215,6 +222,7 @@ public class GUI extends JFrame{
                 textFC.setCurrentDirectory(textFile);
                 textPath = textFile.getPath();
                 slovnik= new Slovnik(textFile);
+                zapis.setText(OperaceIO.nactiText(textFile));
             }
         }}
 
@@ -274,18 +282,21 @@ public class GUI extends JFrame{
             	resetujVypis();
             	vypis.append("Není vybrán vstup z konzole a není vybraný žádný soubor s textem. Hledání neprobìhlo. \n");
             }
+           // vypis.setText(Hledac.hledej(slovnik, klic.getText()));
+            
             else if(!check.isSelected())  {//hledání ze souboru
-            	vypis.setText(Hledac.hledej(klic.getText(), textFile));
-            	
+            	//vypis.setText(Hledac.hledej(klic.getText(), textFile));
+            	vypis.setText(Hledac.hledej(slovnik, klic.getText()));
             }
             else {//hledání z textfieldu
             	slovnik = new Slovnik(zapis.getText());
-            	vypis.setText(Hledac.hledej(klic.getText(), zapis.getText()));
+            	vypis.setText(Hledac.hledej(slovnik, klic.getText()));
+            	//vypis.setText(Hledac.hledej(klic.getText(), zapis.getText()));
             	
             }
-            if(!Hledac.klicJeVeSlovniku(slovnik, klic.getText())){//jestli to slovo vùbec je ve slovníku
+           /* if(!Hledac.klicJeVeSlovniku(slovnik, klic.getText())){//jestli to slovo vùbec je ve slovníku
             	//TODO
-            }
+            }*/
         }}
 
     }

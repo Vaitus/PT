@@ -1,13 +1,23 @@
 import java.io.File;
 
+import CompressedTrie.CTrie;
+
 /**Tøída spravující slovník.*/
 public class Slovnik {
 	
+	public CTrie trie;
+	
 	/**Bezparametrický konstruktor pro pøípad nouze.*/
-	public Slovnik(){}
+	public Slovnik(){trie = new CTrie();}
 
 	/**Hlavní konstruktor zpracovávající pøímo string.*/
 	public Slovnik(String s){
+		trie = new CTrie();
+		String [] s1=s.split(" ");
+		for (int i = 0; i < s1.length; i++) {
+            trie.pridejRekurzivne(s1[i], i);
+        }
+		
 		
 	}
 	

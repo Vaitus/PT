@@ -1,4 +1,7 @@
 import java.io.File;
+import java.util.LinkedList;
+
+import Levenshtein.Levenshtein;
 
 /** Knihovní tøída obsahující statické metody týkající se prohledávání textu.*/
 public class Hledac {
@@ -23,10 +26,24 @@ public class Hledac {
 	 * @return true pokud se klíè ve slovníku nachází.
 	 */
 	public static boolean klicJeVeSlovniku(Slovnik slovnik, String klic) {
-		// TODO Auto-generated method stub
+		slovnik.trie.prohledat(klic);//TODO
 		return false;
 	}
 
+	/**
+	 * @overloaded
+	 * Pøetížená metoda pro hledání klíèe.
+	 * Tato èást øeší pøímo prohledávání slovniku.
+	 * @param slovnik prohledávaný slovník
+	 * @param klic hledaný klíè
+	 * @return vypis o tom, na kterých indexech byl klíè nalezen v pùvodním textu.
+	 */
+	public static String hledej(Slovnik slovnik, String klic) {
+		LinkedList<Integer> l =slovnik.trie.prohledat(klic);
+		if (l==null) {return "Slovo nebylo nalezeno ve slovníku. \nVypisuji podobná slova dle Levenshteinovo metody: "+ Levenshtein.vypisDesetSlov(slovnik.trie.vytvoreniSlovniku().split(" "), klic, 10, 3);}
+		else {return "Slovo bylo nalezeno na tìchto indexech slov:" + l.toString();}
+	}
+	
 	/**
 	 * @overloaded
 	 * Pøetížená metoda pro hledání klíèe ve stringu.

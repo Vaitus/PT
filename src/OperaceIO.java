@@ -20,7 +20,7 @@ public class OperaceIO {
 			//s = br.readLine();
         	while(br.ready()){//Zkopíruje do nového souboru pùvodní èást souboru až k dekleraci tøídy.
         		s=br.readLine();
-        		text+=s+"\n";
+        		text+=s+" \n";
         	}
 			br.close();
 		} catch (IOException e) {//Nejsou pokryté všechny chyby
