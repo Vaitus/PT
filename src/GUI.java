@@ -3,6 +3,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.File;
 
 import javax.swing.JButton;
@@ -88,9 +90,24 @@ public class GUI extends JFrame{
 	/**Pøepravka pro slovnik.*/
 	public Slovnik slovnik=new Slovnik();
 	
+	GUI INSTANCE;
+	
 	/**Hlavní konstruktor.*/
 	public GUI(){
+		INSTANCE=this;
 		this.getContentPane().add(vytvorVnitrek());
+		this.addComponentListener(new ComponentAdapter() {//pro zmenu rozmìrù textových objektù pøi zmìnì velikosti
+            public void componentResized(ComponentEvent e) {
+                int a = zapis.getHeight();
+                int b =INSTANCE.getWidth()-20;
+                zapis.setSize(b, a);
+                a=vypis.getHeight();
+                vypis.setSize(b, a);
+                a=klic.getHeight();
+                b =(int) (INSTANCE.getWidth()*0.75);
+                klic.setSize(b-100, a);
+            }
+        });
 	}
 	
 	/**Privátní metoda sloužící pro vytvoøení containeru s grafickými objekty.
@@ -169,6 +186,8 @@ public class GUI extends JFrame{
         c.gridy = 2;
         c.gridwidth = 3;
         klic.setEditable(true);
+        klic.setLineWrap(true);
+        klic.setWrapStyleWord(true);
         vnitrekPN.add(klic, c);
         
         resetujVypis();//Resetuje výpis, aby nebyl zbyteènì velký.
