@@ -17,7 +17,7 @@ public class Slovnik {
 		int index=0;
 		for (int i = 0; i < s1.length; i++) {
             trie.pridejRekurzivne(s1[i], index);
-            index+=s1[i].length();
+            index+=s1[i].length()+1;
         }
 		
 		
