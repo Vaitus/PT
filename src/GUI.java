@@ -13,6 +13,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 public class GUI extends JFrame{
@@ -96,6 +98,7 @@ public class GUI extends JFrame{
 	public GUI(){
 		INSTANCE=this;
 		this.getContentPane().add(vytvorVnitrek());
+		exportFC.addChoosableFileFilter(new FileNameExtensionFilter("Textový soubor","txt"));
 		this.addComponentListener(new ComponentAdapter() {//pro zmenu rozmìrù textových objektù pøi zmìnì velikosti
             public void componentResized(ComponentEvent e) {
                 int a = zapis.getHeight();

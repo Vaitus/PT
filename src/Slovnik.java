@@ -16,11 +16,23 @@ public class Slovnik {
 		String [] s1=s.split(" ");
 		int index=0;
 		for (int i = 0; i < s1.length; i++) {
-            trie.pridejRekurzivne(s1[i], index);
+            trie.pridejRekurzivne(uprav(s1[i]), index);
             index+=s1[i].length()+1;
         }
+	}
+	/**
+	 * Upraveni vstupu na lower case a bez diakritiky
+	 * @param s vstupni string
+	 * @return upraveny string
+	 */
+	public static String uprav(String s) {
+		String temp = s.toLowerCase();
+		temp = temp.replace(",", "");
+		temp = temp.replace(".", "");
+		temp = temp.replace("\n", "");
+		temp = temp.replace("\t", "");
 		
-		
+		return temp;
 	}
 	
 	/**Konstruktor pro import ze souboru.*/
