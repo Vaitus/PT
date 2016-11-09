@@ -8,9 +8,9 @@ import java.util.LinkedList;
  */
 public class Node {
     /**
-     * Hdnota Node
+     * Hodnota Node
      */
-    String key;
+    public String key;
     /**
      * Predchazejici Node
      */
@@ -18,11 +18,11 @@ public class Node {
     /**
      * List vsech nasledujicich Node pro tento
      */
-    LinkedList<Node> naslednik = new LinkedList<>();
+   public LinkedList<Node> naslednik = new LinkedList<>();
     /**
      * List vsech zacatecnich indexu v textu pro tento Node
      */
-    LinkedList<Integer> zacatecniIndex = new LinkedList<>();
+   public LinkedList<Integer> zacatecniIndex = new LinkedList<>();
 
     /**
      * Konstruktor
@@ -125,6 +125,8 @@ public class Node {
         //System.out.println(s);
         return s;
     }
+    
+    
 
     /**
      * Vypisuje hodnotu a jeji zacatecni indexy

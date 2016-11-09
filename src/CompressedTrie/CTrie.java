@@ -7,7 +7,7 @@ import java.util.LinkedList;
  * Implementace komprimovane trie
  */
 public class CTrie {
-    Node root;
+    public Node root;
 
     /**
      * Konstruktor na vytvoreni trie a vytvoreni jejiho roota
@@ -26,31 +26,7 @@ public class CTrie {
         };
     }
 
-    /*@Deprecated
-    public void pridatA(String x, int zacatecniIndex) {
-        Node soucasnyNode;
-        Node tempNode;
-
-        boolean posledni = false;
-        if ((soucasnyNode = root.naslednikSHodnotou(x.charAt(0))) != null) {
-            for (int i = 1; i < x.length(); i++) {
-                if(i == x.length() - 1) posledni = true;
-
-                if (soucasnyNode.masHodnotu(x.charAt(i), i)) {
-                    if(posledni) soucasnyNode.zacatecniIndex.add(zacatecniIndex);
-                    continue;
-                } else if ((tempNode = soucasnyNode.naslednikSHodnotou(x.charAt(i))) != null) {
-                    soucasnyNode = tempNode;
-                } else {
-                    //soucasnyNodu pridas dite...
-                    //TODO Pridas node
-                }
-            }
-        }
-        else {
-            //NEexistuje ve strome, pridat celej text x do jednoho nodu
-        }
-    }*/
+    
 
     /**
      * Pridavani slov do Trie, zacina od roota
@@ -69,12 +45,14 @@ public class CTrie {
      */
     private void pridatRek(Node n, String x, int zacatecniIndex) {
         boolean posledni = false;
-        for (int i = 0; i < x.length(); i++) {
-            if ( i >= x.length()-1) posledni = true;
+        for (int i = 0; i < x.length(); i++) {//pøímé prohledání
+            if ( i >= x.length()-1) posledni = true;//pokud jde o poslední znak
 
-            if (n.masHodnotu(x.charAt(i),i)) {
-                if (posledni) {
-                    if (n.key.length() > x.length()) {
+            if (n.masHodnotu(x.charAt(i),i)) {//hodota shodná v jednom písmenì
+                if (posledni) //jen pokud jde o poslední znak
+                {
+                    if (n.key.length() > x.length()) 
+                    {
                         n.rozdeleni(i+1);
                         n.predek.zacatecniIndex.add(zacatecniIndex);
                     }
@@ -137,6 +115,9 @@ public class CTrie {
             return null;
         }
     }
+    
+    
+    
 
     /**
      * Vytvareny slovnik
@@ -168,6 +149,24 @@ public class CTrie {
                 vytvoreniSlovnikuRek(x);
             }
         }
+    }
+    
+    public void importujNod(String [] nody, int [] indexy){
+    	Node old = root;
+    	Node temp;
+    	for(String s : nody){
+    		temp = new Node(s);
+    		if(!old.naslednik.contains(temp))
+    		{
+    			old.naslednik.add(temp);
+    			temp.predek=old;
+    			old=temp;
+    			}
+    		else{old=old.naslednikSHodnotou(s.charAt(0));}
+    	}
+    	for(int i : indexy){
+    		old.zacatecniIndex.add(i);
+    	}
     }
 
 }

@@ -13,13 +13,13 @@ public class Test {
 
         System.out.println(Levenshtein.vypisDesetSlov(s.split(" "), "stn", 10, 3));
 
-       /* String s = "Ano ty ne a ty ja proc ja ty ono ja";
+         s = "Ano ty ne a ty ja proc ja ty ono ja";
         for (int i = 0; i < s.split(" ").length; i++) {
             System.out.println(s.split(" ")[i] + " i:" + i);
             trie.pridejRekurzivne(s.split(" ")[i], i);
-        }*/
+        }
 
-        /*trie.pridejRekurzivne("Blabla", 2);
+        trie.pridejRekurzivne("Blabla", 2);
         trie.pridejRekurzivne("Kokot", 2);
         trie.pridejRekurzivne("Kokotov", 2);
         trie.pridejRekurzivne("Bla", 2);
@@ -27,13 +27,13 @@ public class Test {
         trie.pridejRekurzivne("Black", 7);
         trie.pridejRekurzivne("Blaz", 8);
         trie.pridejRekurzivne("Blaz", 9);
-        trie.pridejRekurzivne("Blaze", 10);*/
+        trie.pridejRekurzivne("Blaze", 10);
 
 
 
-       /* System.out.println(trie.vytvoreniSlovniku());
+        System.out.println(trie.vytvoreniSlovniku());
 
-        System.out.println(trie.prohledat("Ano"));*/
+        System.out.println(trie.prohledat("Ano"));
 
     }
 
