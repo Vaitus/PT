@@ -26,7 +26,7 @@ public class GUI extends JFrame{
 	private final int sirka = 53;
 	
 	//Naèátání textu.
-	
+	//všechny tøi asi mùu slouèit, jsou zbyteènı.
 	/**Tlaèítko pro naètení textu z JTextArea vstup nebo ze souboru (pøepíná CheckBox).*/
 	JButton nactiText;
 	
@@ -87,7 +87,7 @@ public class GUI extends JFrame{
 	//Kritické elementy
 	
 	/**String se souèasnì pouívanım textem. - pravdìpodobnì nebude potøeba*/
-	public String text;
+	//public String text;
 	
 	/**Pøepravka pro slovnik.*/
 	public Slovnik slovnik=new Slovnik();
@@ -114,7 +114,7 @@ public class GUI extends JFrame{
 	}
 	
 	/**Privátní metoda slouící pro vytvoøení containeru s grafickımi objekty.
-	 * Vytváøí je dynamické a zcela nahodile, nebo toto absolutnì neumím pouívat.*/
+	 * Vytváøí je dynamické a zpravidla zcela nahodile.*/
 	private Container vytvorVnitrek()
     {
 		JPanel vnitrekPN = new JPanel();
@@ -128,7 +128,7 @@ public class GUI extends JFrame{
         c.anchor = 10;
         c.weightx = 0.0D;
         c.weighty = 0.0D;
-        c.gridx = 2; //tady je zmìna pùvodnì 1
+        c.gridx = 2; 
         c.gridy = 1;
         c.gridwidth = 1;
         vnitrekPN.add(nactiText, c);
@@ -169,7 +169,7 @@ public class GUI extends JFrame{
         c.gridwidth = 1;
         vnitrekPN.add(hledej, c);
         
-        check = new JCheckBox("Zápis z konzole");
+        check = new JCheckBox("Vstup z konzole");
         check.setSelected(true);
         check.addActionListener(new Check());
         
@@ -222,9 +222,11 @@ public class GUI extends JFrame{
 	
 	/**Soukromá procedura, která znovu zapíše do objektu vypis všechny potøebné údaje.*/
 	private void resetujVypis(){
-		vypis.setText("Kliknutím na tlaèátko Naèíst text mùete naèíst text ze souboru a tento text bude automaticky zpracován. \n");
-		vypis.append("Kliknutím na tlaèítko Importovat slovník se souèasnı slovník importuje. \n");//TODO nìkdy by to chtìlo dopsat zbytek a poøešit, kdy se to má vypsat a pøepsat
-		
+		vypis.setText("Kliknutím na tlaèítko Naèíst text mùete naèíst text ze souboru a tento text bude automaticky zpracován. \n");
+		vypis.append("Kliknutím na tlaèítko Importovat slovník se naimportuje cizí slovník. \n");
+		vypis.append("Kliknutím na tlaèítko Exportovat slovník se souèasnı slovník exportuje. \n");
+		vypis.append("Kliknutím na tlaèítko Hledat bude vyhledán klíè ve slovníku. \n");
+		vypis.append("Kliknutím na tlaèítko Vstup z konzole pøepínáte mezi vstupem ze souboru a z konzole níe. \n");
 	}
 	
 	/**
@@ -245,6 +247,8 @@ public class GUI extends JFrame{
                 textPath = textFile.getPath();
                 slovnik= new Slovnik(textFile);
                 zapis.setText(OperaceIO.nactiText(textFile));
+                resetujVypis();
+                vypis.append("Text byl úspìšnì naèten.");
             }
         }}
 
@@ -266,6 +270,10 @@ public class GUI extends JFrame{
                 importFC.setCurrentDirectory(importFile);
                 importPath = importFile.getPath();
                 slovnik= OperaceIO.importuj(importFile);
+                check.setSelected(false);
+                resetujVypis();
+                zapis.setText(slovnik.trie.vytvoreniSlovniku());
+                vypis.append("Slovník byl úspìšnì naimportován.");
             }
         }}
 
@@ -285,8 +293,10 @@ public class GUI extends JFrame{
                 exportFile = exportFC.getSelectedFile();
                 exportFC.setCurrentDirectory(exportFile);
                 exportPath = exportFile.getPath();
+                if(check.isSelected()){slovnik = new Slovnik(zapis.getText());}
                 OperaceIO.exportuj(exportFile, slovnik);
-                vypis.append("Soubor uloen i vyexportován. \n");
+                resetujVypis();
+                vypis.append("Soubor byl úspìšnì vyexportován. \n");
             }
         }}
 
@@ -313,6 +323,7 @@ public class GUI extends JFrame{
             else {//hledání z textfieldu
             	slovnik = new Slovnik(zapis.getText());
             	vypis.setText(Hledac.hledej(slovnik, klic.getText()));
+            	check.setSelected(false);
             	//vypis.setText(Hledac.hledej(klic.getText(), zapis.getText()));
             	
             }

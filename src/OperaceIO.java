@@ -9,13 +9,14 @@ import java.io.OutputStreamWriter;
 
 import CompressedTrie.Node;
 
-/**Knihovní tøída se statickými metodami, které se starají o vstup a výstup.*/
+/**Knihovní tøída se statickými metodami, které se starají o vstup a výstup.
+ * @author Marek Zábran, A15B0160P.*/
 public class OperaceIO {
 
 	/**
 	 * Metoda, která naète text ze souboru jako string.
-	 * @param textFile soubor s textem
-	 * @return text ze souboru.
+	 * @param textFile soubor s textem.
+	 * @return Text ze souboru.
 	 */
 	public static String nactiText(File textFile) {
 		String s= "";
@@ -37,7 +38,7 @@ public class OperaceIO {
 	/**
 	 * Metoda, která naète slovník ze souboru.
 	 * @param importFile soubor se slovníkem.
-	 * @return slovnik naimportovaný ze souboru.
+	 * @return Slovník naimportovaný ze souboru.
 	 */
 	public static Slovnik importuj(File importFile) {
 		Slovnik slovnik = new Slovnik();
@@ -72,15 +73,18 @@ public class OperaceIO {
 
 	/**
 	 * Metoda, která exportuje slovník do souboru.
-	 * @param exportFile soubor, do kterého se bude zapisovat
-	 * @param slovnik zapisovaný do souboru
+	 * @param exportFile soubor, do kterého se bude zapisovat.
+	 * @param Slovník zapisovaný do souboru.
 	 */
 	public static void exportuj(File exportFile, Slovnik slovnik) {
 		try{
 			BufferedWriter bw = new BufferedWriter( new OutputStreamWriter( new FileOutputStream(exportFile.getAbsolutePath()), "UTF-8") );
 			//s = br.readLine();
         	
-        		vypisSlovnik(bw, slovnik);
+        		//vypisSlovnik(bw, slovnik);
+			for(Node n:slovnik.trie.root.naslednik){
+				vypisNod("", bw, n);
+			}
         		
 			bw.close();
 		} catch (IOException e) {//Nejsou pokryté všechny chyby
@@ -88,19 +92,31 @@ public class OperaceIO {
 		}
 	}
 
-	private static void vypisSlovnik(BufferedWriter bw, Slovnik slovnik) {
+	/**
+	 * Pomocná metoda exportuj()
+	 * @param bw
+	 * @param slovnik
+	 */
+	/*private static void vypisSlovnik(BufferedWriter bw, Slovnik slovnik) {
 		for(Node n:slovnik.trie.root.naslednik){
 			vypisNod("", bw, n);
 		}
-	}
+	}*/
 
+	/**
+	 * Pomocná metoda exportuj(), která vypíše do souboru souèasný uzel, 
+	 * pokud se vyskytuje v textu, a rekurzivnì se pak volá pro uzly svých následníkù.
+	 * @param s podøetìzec vzniklý spojením podøetìzcù všech pøedkù.
+	 * @param bw BufferedWriter zapisující do souboru.
+	 * @param n souèasný uzel.
+	 */
 	private static void vypisNod(String s, BufferedWriter bw, Node n) {
-		s +=" " + n.key;
+		s +=" " + n.getKey();
 		if(!n.zacatecniIndex.isEmpty()){
-			String line = s+"\t";
-			for(int i=0;i<n.zacatecniIndex.size();i++){
-				line +=n.zacatecniIndex.get(i)+" ";
-			}
+			String line = s+n.vratIndexy();
+			//for(int i=0;i<n.zacatecniIndex.size();i++){
+			//	line +=n.zacatecniIndex.get(i)+" ";
+			//}
 			line=line.substring(1, line.length()-1);
 			try {
 				bw.write(line);

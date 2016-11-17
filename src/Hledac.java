@@ -1,44 +1,40 @@
-import java.io.File;
 import java.util.LinkedList;
-
 import javax.swing.JOptionPane;
-
 import Levenshtein.Levenshtein;
 
-/** Knihovní tøída obsahující statické metody týkající se prohledávání textu.*/
+/** Knihovní tøída obsahující statickou metodu prohledávající slovník.
+ * @author Marek Zábran.*/
 public class Hledac {
 
 	/**
-	 * @overloaded
 	 * Pøetížená metoda pro hledání klíèe ve stringu.
 	 * Vytáhne text ze souboru a zbytek je identický druhému øešení této metody.
 	 * @param klic vyhledávaný v textu
 	 * @param textFile soubor s textem
 	 * @return vypis o tom, kolikrát a kde byl klíè nalezen.
 	 */
-	public static String hledej(String klic, File textFile) {
+	/*public static String hledej(String klic, File textFile) {
 		String text = OperaceIO.nactiText(textFile);
 		return Hledac.hledej(klic, text);
-	}
+	}*/
 
 	/**
 	 * Podívá se, jestli je klíè vùbec ve slovníku.
-	 * @param slovnik prohledávaný
-	 * @param klic hledaný ve slovníku
-	 * @return true pokud se klíè ve slovníku nachází.
+	 * @param slovnik prohledávaný slovník.
+	 * @param klic hledaný ve slovníku.
+	 * @return True, pokud se klíè ve slovníku nachází.
 	 */
-	public static boolean klicJeVeSlovniku(Slovnik slovnik, String klic) {
-		slovnik.trie.prohledat(klic);//TODO
+	/*public static boolean klicJeVeSlovniku(Slovnik slovnik, String klic) {
+		slovnik.trie.prohledat(klic);
 		return false;
-	}
+	}*/
 
 	/**
-	 * @overloaded
-	 * Pøetížená metoda pro hledání klíèe.
-	 * Tato èást øeší pøímo prohledávání slovniku.
-	 * @param slovnik prohledávaný slovník
-	 * @param klic hledaný klíè
-	 * @return vypis o tom, na kterých indexech byl klíè nalezen v pùvodním textu.
+	 * Metoda pro hledání klíèe.
+	 * Pøímo prohledávává slovník.
+	 * @param slovnik prohledávaný slovník.
+	 * @param klic hledaný klíè.
+	 * @return Výpis, na kterých indexech byl klíè nalezen v pùvodním textu.
 	 */
 	public static String hledej(Slovnik slovnik, String klic) {
 		klic = Slovnik.uprav(klic);
@@ -56,16 +52,15 @@ public class Hledac {
 	}
 	
 	/**
-	 * @overloaded
 	 * Pøetížená metoda pro hledání klíèe ve stringu.
 	 * Tato èást øeší pøímo prohledávání textu.
 	 * @param klic vyhledávaný v textu
 	 * @param text prohledávaný
 	 * @return vypis o tom, kolikrát a kde byl klíè nalezen.
 	 */
-	public static String hledej(String klic, String text) {
+	/*public static String hledej(String klic, String text) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 }
