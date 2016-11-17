@@ -3,14 +3,18 @@ package CompressedTrie;
 import java.util.LinkedList;
 
 /**
- * Created by Vaitus on 15.10.2016.
- * Implementace komprimovane trie
+ * Tøída pøedstavující komprimovanou trii.
+ * Jednotlivé uzly pøedstavují instance tøídy Node.
+ * @author Vít Teøl, pomáhal Marek Zábran.
+ * 
  */
 public class CTrie {
+	/**Poèáteèní uzel trie (koøen).*/
     public Node root;
 
     /**
-     * Konstruktor na vytvoreni trie a vytvoreni jejiho roota
+     * Primární bezparametrický konstruktor trie.
+     * Vytváøí root a pøepisuje nìkteré jeho metody.
      */
     public CTrie() {
         root = new Node("") {
@@ -28,22 +32,22 @@ public class CTrie {
 
     
 
-    /**
-     * Pridavani slov do Trie, zacina od roota
+   /* /** zbyteèné
+     * Pøidá slovo do trie. 
      * @param x pridavane slovo
      * @param zacatniIndex index na kterem zacinalo v textu
      */
-    public void pridejRekurzivne(String x, int zacatniIndex) {
+    /*public void pridejRekurzivne(String x, int zacatniIndex) {
         pridatRek(root, x, zacatniIndex);
-    }
+    }*/
 
     /**
-     * Pridavani slov do Trie
-     * @param n prohledavany Node
-     * @param x dane slovo
-     * @param zacatecniIndex index na kterem zacinalo v textu
+     * Pøidá rekurzivnì slovo do trie.
+     * @param n souèasný uzel.
+     * @param x pøidávané slovo.
+     * @param zacatecniIndex index pøidávaného slova v textu.
      */
-    private void pridatRek(Node n, String x, int zacatecniIndex) {
+    public void pridatRek(Node n, String x, int zacatecniIndex) {
         boolean posledni = false;
         for (int i = 0; i < x.length(); i++) {//pøímé prohledání
             if ( i >= x.length()-1) posledni = true;//pokud jde o poslední znak
@@ -84,9 +88,10 @@ public class CTrie {
     }
 
     /**
-     * Vyhleda jestli hledane slovo se nachazi v Trie
-     * @param x hledane slovo
-     * @return pokud se nachazi navrati zacatecni indexy v textu, pokud nenachazi vrati null
+     * Vyhledá všechny indexy zadaného slova v trii.
+     * @param x hledané slovo.
+     * @return Poèáteèní indexy slova v textu. 
+     * Vrací null, pokud slovo nebylo nalezeno.
      */
     public LinkedList<Integer> prohledat(String x){
         Node temp = root;
@@ -120,13 +125,13 @@ public class CTrie {
     
 
     /**
-     * Vytvareny slovnik
+     * Pomocný øetìzec obsahující všechna celá slova ve slovníku.
      */
     private static String slovnik = "";
 
     /**
-     * Vytvori retezec ze vsech slov v Trie
-     * @return retezec slovniku
+     * Vytvoøí øetìzec ze všech slov ve trii.
+     * @return Øetìzec všech slov ve trii.
      */
     public String vytvoreniSlovniku() {
         slovnik = "";
@@ -135,8 +140,9 @@ public class CTrie {
     }
 
     /**
-     * Rekuretni vytvareni slovniku, doplnkova metoda k vytvoreniSlovniku
-     * @param n dany Node
+     * Rekuretni doplnkova metoda k vytvoreniSlovniku().
+     * Prochází všechny následníky a zapisuje celá slova.
+     * @param n souèasný uzel.
      */
     private void vytvoreniSlovnikuRek(Node n) {
         for (Node x : n.naslednik) {
@@ -151,6 +157,13 @@ public class CTrie {
         }
     }
     
+    /**
+     * Importuje uzly.
+     * Už existující uzly se nepøepisují, jen se pøidávají indexy.
+     * @param nody array podøetìzcù vzniklý rozdìlením slova 
+     * na podøetìzce uzlù v komprimované trii.
+     * @param indexy slova v pùvodním textu.
+     */
     public void importujNod(String [] nody, int [] indexy){
     	Node old = root;
     	Node temp;
@@ -161,7 +174,7 @@ public class CTrie {
     			old.naslednik.add(temp);
     			temp.predek=old;
     			old=temp;
-    			}
+    		}
     		else{old=old.naslednikSHodnotou(s.charAt(0));}
     	}
     	for(int i : indexy){

@@ -3,48 +3,51 @@ package CompressedTrie;
 import java.util.LinkedList;
 
 /**
- * Created by Vaitus on 13.10.2016.
- * Node pro s danou hodnotou pro Trie
+ * Tøída pøedstavující jednotlivé uzly trie.
+ * @author Vít Teøl, pomáhal Marek Zábran.
+ * 
  */
 public class Node {
     /**
-     * Hodnota Node
+     * Podøetìzec uzlu (Node) - (èást slova z textu).
      */
-    public String key;
+    String key;
     /**
-     * Predchazejici Node
+     * Odkaz na pøedchozí uzel.
      */
     Node predek;
     /**
-     * List vsech nasledujicich Node pro tento
+     * List všech následujících uzlù tohoto uzlu.
      */
    public LinkedList<Node> naslednik = new LinkedList<>();
     /**
-     * List vsech zacatecnich indexu v textu pro tento Node
+     * List všech poèáteèních indexù v textu pro tento uzel
+     * (jednou za každou použitý tohoto slova).
      */
    public LinkedList<Integer> zacatecniIndex = new LinkedList<>();
 
     /**
-     * Konstruktor
-     * @param key hodnota Node
+     * Primární konstruktor uzlu.
+     * @param key podøetìzec uzlu.
      */
     public Node(String key) {
         this.key = key;
     }
 
     /**
-     * Rozsliseni jestli je dany Node root nebo ne
-     * @return zda je root
+     * Kontroluje, jestli je se jedná o root.
+     * U rootu je tato metoda pøepsána.
+     * @return true, pokud se jedná o root.
      */
     public boolean jeRoot() {
         return false;
     }
 
     /**
-     * Rozhodnuti jestli ma danou hodnotu na zadanem indexu
-     * @param x zadana hodnota
-     * @param index dany index
-     * @return pokud ma hodnotu na indexu
+     * Kontroluje, jestli má uzel ve svém podøetìzci na zadaném indexu zadaný znak.
+     * @param x zadaný znak.
+     * @param index zadaný index.
+     * @return True, pokud má na daném indexu daný znak.
      */
     public boolean masHodnotu(char x, int index) {
         if(index >= key.length()) return false;
@@ -52,9 +55,9 @@ public class Node {
     }
 
     /**
-     * Rozhodnuti jestli ma naslednika s danou hodnotou
-     * @param x hodnota
-     * @return zda ma naslednika s hodnotou
+     * Kontroluje, jestli existuje následník se zadaným znakem na prvním indexu podøetìzce.
+     * @param x kontrolovaný znak.
+     * @return True, pokud existuje takový následník.
      */
     public boolean masNaslednikaSHodnotou(char x) {
         for (Node n: naslednik) {
@@ -68,9 +71,9 @@ public class Node {
     }
 
     /**
-     * Navraci naslednika s zacatecni hodnotou
-     * @param x hodnota
-     * @return naslednik s danou hodnotou
+     * Hledá následníka se zadaným znakem na prvním indexu podøetìzce.
+     * @param x hledaný znak.
+     * @return Nalezený následník.
      */
     public Node naslednikSHodnotou(char x){
         for (Node n: naslednik) {
@@ -84,8 +87,10 @@ public class Node {
     }
 
     /**
-     * Rozdeli dany Node na 2 pokud je to nutne
-     * @param index kde se ma rozdelit
+     * Rozdìlí uzel na dva.
+     * (použito v pøípadì existence indentických 
+     * podøetìzcù slov ve slovníku pro komprimaci).
+     * @param index znaku, ve kterém se má øetìzec rozdìlit na dva podøetìzce.
      */
     public void rozdeleni(int index){
         Node novy = new Node(this.key.substring(0,index));
@@ -101,8 +106,8 @@ public class Node {
     }
 
     /**
-     * Prida naslednika danemu Node
-     * @param n dany Node
+     * Pøidá tomuto uzlu zadaného následníka.
+     * @param n zadaný následník.
      */
     public void pridejPotomka(Node n){
         n.predek = this;
@@ -110,8 +115,8 @@ public class Node {
     }
 
     /**
-     * Vypise cele slovo pro Trie
-     * @return cele slovo
+     * Vytáhne ze slovníku celé slovo z tohoto uzlu.
+     * @return Celé slovo pøíslušící tomuto uzlu.
      */
     public String vypisCeleSlovo() {
         String s = "";
@@ -129,15 +134,40 @@ public class Node {
     
 
     /**
-     * Vypisuje hodnotu a jeji zacatecni indexy
-     * @return hodnota a zacatecni idnexy
+     * Získá podøetìzec tohoto uzlu a všechny pøíslušné poèáteèní indexy v podobì stringu.
+     * @return Podøetìzec uzlu a poèáteèní indexy.
      */
     @Override
     public String toString() {
-        String result = key + " ";
+    	
+    	String result = key + " ";
         for(Integer index :zacatecniIndex) {
             result += index + " ";
         }
         return result;
     }
+    
+    /**
+     * Získá všechny pøíslušné poèáteèní indexy v podobì stringu.
+     * @return Poèáteèní indexy.
+     */
+    public String vratIndexy(){
+    	String result = "\t";
+        for(Integer index :zacatecniIndex) {
+            result += index + " ";
+        }
+        return result;
+    }
+
+    /** 
+     * Getr pro podøetìzec uzlu.
+     * @return Podøetìzec tohoto uzlu.
+     */
+	public String getKey() {
+		return this.key;
+	}
+    
+    
+    
+    
 }
