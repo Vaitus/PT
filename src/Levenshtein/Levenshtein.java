@@ -4,16 +4,17 @@ package Levenshtein;
 import java.util.LinkedList;
 
 /**
- * Created by Vaitus on 23.10.2016.
- * Implementace Levenshteinovy vzdalenosti a pouziti pro rozdil mezi slovnikem a vyhledavanym slovem
+ * Knihovní tøída implementující Levenshteinovu vzdálenost
+ * a její využití pro nalezení nejbližších slov.
+ * @author Vít Teøl, pomáhal Marek Zábran.
  */
 public class Levenshtein {
 
     /**
-     * Vypocet Levenshteinovy vzdalenosti ze 2 retezcu
-     * @param txt1 1. retezec
-     * @param txt2 2. retezec
-     * @return hodnota Levenshteinovy vzdalenosti pro dane 2 retezce
+     * Výpoèet Levenshteinovy vzdálenosti ze dvou øetìzcù.
+     * @param txt1 1. øetìzec
+     * @param txt2 2. øetìzec
+     * @return Hodnota Levenshteinovy vzdálenosti pro dané dva øetìzce.
      */
     public static Integer levenshteinVzdalenost(String txt1, String txt2) {
         int[][] pole = new int[txt1.length()+1][txt2.length()+1];
@@ -39,33 +40,35 @@ public class Levenshtein {
     }
 
     /**
-     * Vypocet minimalni hodnoty ze 3 cisel
-     * @param a 1. cislo
-     * @param b 2. cislo
-     * @param c 3. cislo
-     * @return minimalni hodnota
+     * Výpoèet minimální hodnoty ze tøí èísel.
+     * @param a 1. èíslo.
+     * @param b 2. èíslo.
+     * @param c 3. èíslo.
+     * @return Minimálni hodnota.
      */
     private static Integer minimum(int a, int b, int c) {
         return Math.min(Math.min(a,b),c);
     }
 
     /**
-     * Vypsani maximalne 10 nejpodobnejsich slov ze slovniku danemu slovu, ktere maji maximalne Levenshteinovu vzdalenost 5
-     * @param slovnik pole vsech slov ulozenych ve slovniku
-     * @param slovo porovnavane slovo
-     * @return List nejpodobnejsich slov
+     * Vypíše až 10 nejpodobnìjších slov ze slovníku, které mají maximalní Levenshteinovu vzdálenost 5.
+     * Jedná se o specifickou verzi stejnojmenné pøetížené metody.
+     * @param slovnik pole všech slov uložených ve slovníku.
+     * @param slovo porovnávané slovo.
+     * @return List nejpodobnìjších slov.
      */
     public static LinkedList<String> vypisDesetSlov(String[] slovnik, String slovo) {
         return vypisDesetSlov(slovnik, slovo, 10, 5);
     }
 
     /**
-     * Pretizena metoda vypisDesetSlov, zde nastavitelna velikost poctu nejpodobnejsich slov a do jake Levenshteinovy vzdalenosti
-     * @param slovnik pole vsech slov ulozenych ve slovniku
-     * @param slovo porovnavane slovo
-     * @param delka maximalni velikost navracujiciho Listu
-     * @param velikostVzdalenosti maximalni Levenshteinova vzdalenost
-     * @return List nejpodobnejsich slov
+     * Pøetížená metoda vypisDesetSlov.
+     * Maximum nejbližších slov a nejvyšší Levenshteinova vzdálenost jsou nastavitelné.
+     * @param slovnik pole vsech slov uložených ve slovníku.
+     * @param slovo porovnávané slovo.
+     * @param delka maximalní množství nejbližších slov.
+     * @param velikostVzdalenosti maximalní Levenshteinova vzdálenost.
+     * @return List nejpodobnìjších slov.
      */
     public static LinkedList<String> vypisDesetSlov(String[] slovnik, String slovo, int delka, int velikostVzdalenosti) {
         int[] levenDis = new int[slovnik.length];
@@ -78,7 +81,7 @@ public class Levenshtein {
 
         while (vysledek.size() <= delka && minimalniVzdalenost < velikostVzdalenosti) {
             for (int i = 0; i < slovnik.length; i++) {
-                if (levenDis[i] == minimalniVzdalenost && vysledek.size() < 11) {
+                if (levenDis[i] == minimalniVzdalenost && vysledek.size() < 11) {//Co ta konstanta tady? Nemá tu být velikostVzdalenosti+1?
                     vysledek.add(slovnik[i]);
                 }
             }
