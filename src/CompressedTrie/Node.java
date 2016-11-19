@@ -3,51 +3,51 @@ package CompressedTrie;
 import java.util.LinkedList;
 
 /**
- * Tøída pøedstavující jednotlivé uzly trie.
- * @author Vít Teøl, pomáhal Marek Zábran.
+ * T??da p?edstavuj?c? jednotliv? uzly trie.
+ * @author V?t Te?l, pom?hal Marek Z?bran.
  * 
  */
 public class Node {
     /**
-     * Podøetìzec uzlu (Node) - (èást slova z textu).
+     * Pod?et?zec uzlu (Node) - (??st slova z textu).
      */
     String key;
     /**
-     * Odkaz na pøedchozí uzel.
+     * Odkaz na p?edchoz? uzel.
      */
     Node predek;
     /**
-     * List všech následujících uzlù tohoto uzlu.
+     * List v?ech n?sleduj?c?ch uzl? tohoto uzlu.
      */
    public LinkedList<Node> naslednik = new LinkedList<>();
     /**
-     * List všech poèáteèních indexù v textu pro tento uzel
-     * (jednou za každou použitý tohoto slova).
+     * List v?ech po??te?n?ch index? v textu pro tento uzel
+     * (jednou za ka?dou pou?it? tohoto slova).
      */
    public LinkedList<Integer> zacatecniIndex = new LinkedList<>();
 
     /**
-     * Primární konstruktor uzlu.
-     * @param key podøetìzec uzlu.
+     * Prim?rn? konstruktor uzlu.
+     * @param key pod?et?zec uzlu.
      */
     public Node(String key) {
         this.key = key;
     }
 
     /**
-     * Kontroluje, jestli je se jedná o root.
-     * U rootu je tato metoda pøepsána.
-     * @return true, pokud se jedná o root.
+     * Kontroluje, jestli je se jedn? o root.
+     * U rootu je tato metoda p?eps?na.
+     * @return true, pokud se jedn? o root.
      */
     public boolean jeRoot() {
         return false;
     }
 
     /**
-     * Kontroluje, jestli má uzel ve svém podøetìzci na zadaném indexu zadaný znak.
-     * @param x zadaný znak.
-     * @param index zadaný index.
-     * @return True, pokud má na daném indexu daný znak.
+     * Kontroluje, jestli m? uzel ve sv?m pod?et?zci na zadan?m indexu zadan? znak.
+     * @param x zadan? znak.
+     * @param index zadan? index.
+     * @return True, pokud m? na dan?m indexu dan? znak.
      */
     public boolean masHodnotu(char x, int index) {
         if(index >= key.length()) return false;
@@ -55,9 +55,9 @@ public class Node {
     }
 
     /**
-     * Kontroluje, jestli existuje následník se zadaným znakem na prvním indexu podøetìzce.
-     * @param x kontrolovaný znak.
-     * @return True, pokud existuje takový následník.
+     * Kontroluje, jestli existuje n?sledn?k se zadan?m znakem na prvn?m indexu pod?et?zce.
+     * @param x kontrolovan? znak.
+     * @return True, pokud existuje takov? n?sledn?k.
      */
     public boolean masNaslednikaSHodnotou(char x) {
         for (Node n: naslednik) {
@@ -71,9 +71,9 @@ public class Node {
     }
 
     /**
-     * Hledá následníka se zadaným znakem na prvním indexu podøetìzce.
-     * @param x hledaný znak.
-     * @return Nalezený následník.
+     * Hled? n?sledn?ka se zadan?m znakem na prvn?m indexu pod?et?zce.
+     * @param x hledan? znak.
+     * @return Nalezen? n?sledn?k.
      */
     public Node naslednikSHodnotou(char x){
         for (Node n: naslednik) {
@@ -87,10 +87,10 @@ public class Node {
     }
 
     /**
-     * Rozdìlí uzel na dva.
-     * (použito v pøípadì existence indentických 
-     * podøetìzcù slov ve slovníku pro komprimaci).
-     * @param index znaku, ve kterém se má øetìzec rozdìlit na dva podøetìzce.
+     * Rozd?l? uzel na dva.
+     * (pou?ito v p??pad? existence indentick?ch 
+     * pod?et?zc? slov ve slovn?ku pro komprimaci).
+     * @param index znaku, ve kter?m se m? ?et?zec rozd?lit na dva pod?et?zce.
      */
     public void rozdeleni(int index){
         Node novy = new Node(this.key.substring(0,index));
@@ -106,8 +106,8 @@ public class Node {
     }
 
     /**
-     * Pøidá tomuto uzlu zadaného následníka.
-     * @param n zadaný následník.
+     * P?id? tomuto uzlu zadan?ho n?sledn?ka.
+     * @param n zadan? n?sledn?k.
      */
     public void pridejPotomka(Node n){
         n.predek = this;
@@ -115,8 +115,8 @@ public class Node {
     }
 
     /**
-     * Vytáhne ze slovníku celé slovo z tohoto uzlu.
-     * @return Celé slovo pøíslušící tomuto uzlu.
+     * Vyt?hne ze slovn?ku cel? slovo z tohoto uzlu.
+     * @return Cel? slovo p??slu??c? tomuto uzlu.
      */
     public String vypisCeleSlovo() {
         String s = "";
@@ -134,8 +134,8 @@ public class Node {
     
 
     /**
-     * Získá podøetìzec tohoto uzlu a všechny pøíslušné poèáteèní indexy v podobì stringu.
-     * @return Podøetìzec uzlu a poèáteèní indexy.
+     * Z?sk? pod?et?zec tohoto uzlu a v?echny p??slu?n? po??te?n? indexy v podob? stringu.
+     * @return Pod?et?zec uzlu a po??te?n? indexy.
      */
     @Override
     public String toString() {
@@ -148,8 +148,8 @@ public class Node {
     }
     
     /**
-     * Získá všechny pøíslušné poèáteèní indexy v podobì stringu.
-     * @return Poèáteèní indexy.
+     * Z?sk? v?echny p??slu?n? po??te?n? indexy v podob? stringu.
+     * @return Po??te?n? indexy.
      */
     public String vratIndexy(){
     	String result = "\t";
@@ -160,8 +160,8 @@ public class Node {
     }
 
     /** 
-     * Getr pro podøetìzec uzlu.
-     * @return Podøetìzec tohoto uzlu.
+     * Getr pro pod?et?zec uzlu.
+     * @return Pod?et?zec tohoto uzlu.
      */
 	public String getKey() {
 		return this.key;

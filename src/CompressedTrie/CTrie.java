@@ -32,14 +32,14 @@ public class CTrie {
 
     
 
-   /* /** zbyteèné
+   /** zbyteèné
      * Pøidá slovo do trie. 
      * @param x pridavane slovo
      * @param zacatniIndex index na kterem zacinalo v textu
      */
-    /*public void pridejRekurzivne(String x, int zacatniIndex) {
+    public void pridejRekurzivne(String x, int zacatniIndex) {
         pridatRek(root, x, zacatniIndex);
-    }*/
+    }
 
     /**
      * Pøidá rekurzivnì slovo do trie.
@@ -75,7 +75,7 @@ public class CTrie {
 
                 if(n.jeRoot()) {
                     n.pridejPotomka(novy);
-                } else if (n.key.length()-1 <= i) {
+                } else if (n.key.length() <= i) {
                     n.pridejPotomka(novy);
                 } else {
                     n.rozdeleni(i);
